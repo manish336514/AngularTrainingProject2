@@ -1,0 +1,20 @@
+<div>
+  <h3>
+    List Of Actors
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Rating</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actor of actorList; index as n">
+          <td>{{ actor.name }}</td>
+          <td>{{ actor.Rating }}</td>
+          <td>
+            <button (click)="deleteActor(n)">X</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </h3>
+</div>
