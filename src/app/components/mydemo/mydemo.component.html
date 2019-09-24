@@ -2,8 +2,42 @@
   <h4>The Memo Component</h4>
   Your message us:{{ message }}
   <div>
+    <button (click)="toggleText()">
+      {{ bthText }}
+    </button>
+  </div>
+  <div *ngIf="testFlag; else alternateDiv">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quibusdam
     expedita sunt. Quo praesentium exercitationem voluptate, itaque labore neque
     quia minima fuga impedit laboriosam, quos eos ullam adipisci natus ut.
   </div>
+  <ng-template #alternateDiv>
+    <h4>
+      Alternate Text
+    </h4>
+    This is alternate text sgown when condition is *ngIf flase
+  </ng-template>
+
+  <div>
+    <label> Block Number <input type="text" #block /> </label>
+  </div>
+  <button (click)="setBlockNumber(block.value)">Submit</button>
+
+  <div [ngSwitch]="blockNumber">
+    <h4>Switch demo</h4>
+    This is the ng Switch Demo
+    <div *ngSwitchCase="1">
+      First Block
+    </div>
+    <div *ngSwitchCase="2">
+      Second Block
+    </div>
+    <div *ngSwitchCase="3">
+      third Block
+    </div>
+    <div *ngSwitchDefault>
+      Default Block
+    </div>
+  </div>
 </div>
+<!-- ng template is a block which can be used anywere -->

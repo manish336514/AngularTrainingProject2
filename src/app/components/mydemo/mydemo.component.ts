@@ -7,8 +7,23 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class MydemoComponent implements OnInit {
   @Input() message;
+  testFlag: boolean;
+  bthText = "Hide Text";
+  blockNumber: number;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.testFlag = true;
+    this.blockNumber = 300;
+  }
+
+  toggleText() {
+    this.testFlag = !this.testFlag;
+    this.bthText = "Show Text";
+  }
+
+  setBlockNumber(block: number) {
+    this.blockNumber = block;
+  }
 }
