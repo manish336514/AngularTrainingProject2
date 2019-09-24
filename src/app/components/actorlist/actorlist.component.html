@@ -8,10 +8,29 @@
       </thead>
       <tbody>
         <tr *ngFor="let actor of actorList; index as n">
-          <td>{{ actor.name }}</td>
-          <td>{{ actor.Rating }}</td>
+          <td>
+            <span *ngIf="n !== selectedIndex">
+              {{ actor.name }}
+            </span>
+            <span *ngIf="n === selectedIndex">
+              <input type="text" [(ngModel)]="actor.name" />
+            </span>
+          </td>
+          <td>
+            <span *ngIf="n !== selectedIndex">
+              {{ actor.Rating }}
+            </span>
+            <span *ngIf="n === selectedIndex">
+              <input type="text" [(ngModel)]="actor.Rating" />
+            </span>
+          </td>
           <td>
             <button (click)="deleteActor(n)">X</button>
+            <button (click)="editActor(n)">edit</button>
+
+            <button (click)="saveActor(n)">save</button>
+
+            <button (click)="cancelActor(n)">CANCEL</button>
           </td>
         </tr>
       </tbody>
