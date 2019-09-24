@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
-import { worker } from "cluster";
 
 @Component({
   selector: "app-actorlist",
@@ -11,6 +9,7 @@ export class ActorlistComponent implements OnInit {
   actorList;
   selectedIndex: number;
   tempActor;
+  tempActorList;
   constructor() {}
 
   ngOnInit() {
@@ -21,12 +20,21 @@ export class ActorlistComponent implements OnInit {
       },
       {
         name: "Rajnikant",
-        Rating: 70
+        Rating: 90
+      },
+      {
+        name: "Hrithik",
+        Rating: 60
+      },
+      {
+        name: "Dhoni",
+        Rating: 95
       }
     ];
 
     this.selectedIndex = -1;
     this.tempActor = null;
+    this.tempActorList = this.actorList.slice();
   }
 
   deleteActor(index: number) {
@@ -34,7 +42,7 @@ export class ActorlistComponent implements OnInit {
   }
   editActor(index: number) {
     this.selectedIndex = index;
-    this.tempActor = this.actorList[index];
+    // this.tempActor = this.actorList[index];
     //Do not use this
     //shallow copy Problem
 
@@ -59,5 +67,47 @@ export class ActorlistComponent implements OnInit {
   cancelActor(index: number) {
     this.actorList[index] = this.tempActor;
     this.selectedIndex = -1;
+  }
+
+  handleKey(index: number, event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      this.cancelActor(index);
+    }
+  }
+
+  sortList(direction: string, property: string) {
+    this.actorList.sort((firstObj, secondObj) => {
+      if (direction === "assending") {
+        //Asseccnding order
+
+        if (typeof firstObj[property] === "string") {
+          //String Comparision
+          if (firstObj[property] < secondObj[property]) return -1;
+          if (firstObj[property] > secondObj[property]) return 1;
+          return 0;
+        } else {
+          //Numeric Comparision
+
+          return firstObj[property] - secondObj[property];
+        }
+      } else {
+        //Descending order
+
+        if (typeof firstObj[property] === "string") {
+          //String Comparision
+          if (firstObj[property] < secondObj[property]) return 1;
+          if (firstObj[property] > secondObj[property]) return -1;
+          return 0;
+        } else {
+          //Numeric Comparision
+
+          return secondObj[property] - firstObj[property];
+        }
+      }
+    });
+  }
+
+  resetList() {
+    this.actorList = this.tempActorList.slice();
   }
 }
