@@ -18,6 +18,9 @@
     This is alternate text sgown when condition is *ngIf flase
   </ng-template>
 
+  <div>Enter text<input type="text" [(ngModel)]="text" /></div>
+  <p>You typed :{{ text }}</p>
+
   <div>
     <label> Block Number <input type="text" #block /> </label>
   </div>
